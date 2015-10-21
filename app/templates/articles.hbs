@@ -1,0 +1,16 @@
+<div class="ui grid">
+  <div class="five wide column">
+    {{#each model as |article|}}
+    <article class="ui segment">
+      <div class="ui header">{{#link-to 'articles.article' article}}{{article.title}}{{/link-to}}</div>
+      <div class="ui divider"></div>
+      <div class="perex">{{article.perex}}</div>
+    </article>
+    {{/each}}
+  </div>
+
+  <div class="eleven wide column">
+    {{outlet}}
+  </div>
+
+</div>

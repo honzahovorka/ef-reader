@@ -1,9 +1,13 @@
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var pickFiles = require('broccoli-static-compiler');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     // Add options here
+    sassOptions: {
+      extension: 'scss' // or sass
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -19,5 +23,13 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  return app.toTree();
+  app.import('bower_components/semantic/dist/semantic.min.css');
+  app.import('bower_components/semantic/dist/semantic.min.js');
+
+  var semanticUiFonts = pickFiles('bower_components/semantic/dist/themes/default/assets/fonts', {
+    srcDir: '/',
+    destDir: '/assets/themes/default/assets/fonts'
+  });
+
+  return app.toTree([semanticUiFonts]);
 };
